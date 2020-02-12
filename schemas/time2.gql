@@ -1,0 +1,100 @@
+ define
+
+################
+## Time Attributes ##
+################
+    
+    remainder sub attribute,
+        datatype boolean,
+        plays resrem,
+        plays remrem;
+
+            
+    hour sub attribute,
+        datatype string,
+        regex "^([01]?[0-9]|2[0-3])$",
+        plays addeeh,
+        plays addorh,
+        plays resulth,
+        plays remresh;
+    
+    minute sub attribute,
+        datatype string,
+        regex "^[0-5][0-9]$",
+        plays addeem,
+        plays addorm,
+        plays resultm,
+        plays remresm;
+
+    second sub attribute,
+        datatype string,
+        regex "^[0-5][0-9]$",
+        plays addees,
+        plays addors,
+        plays results,
+        plays remress;
+    
+    msec sub attribute,
+        datatype long;
+
+    time sub attribute,
+        datatype date,
+        has hour,
+        has minute,
+        has second,
+        has msec;
+
+
+###################
+## Time Addition Relations ##
+###################
+
+    addhour sub relation,
+        relates addeeh,
+        relates addorh,
+        relates resulth,
+        relates remresh,
+        relates resrem,
+        relates remrem;
+    
+    addmin sub relation,
+        relates addeem,
+        relates addorm,
+        relates resultm,
+        relates remresm,
+        relates resrem,
+        relates remrem;
+
+    addsec sub relation,
+        relates addees,
+        relates addors,
+        relates results,
+        relates remress,
+        relates resrem,
+        relates remrem;
+
+
+###################
+## Events and Context ##
+###################
+
+    name sub attribute,
+        datatype string;
+    
+    neartime sub time;
+    mintime sub time;
+    maxtime sub time;
+
+    start sub time;
+    end sub time;
+
+    context sub entity,
+        has name,
+        has neartime,
+        has mintime,
+        has maxtime;
+
+    event sub entity,
+        has name,
+        has start,
+        has end;

@@ -1,0 +1,107 @@
+###### DOESN't WORK -old work, not correct
+# sinple script to add context variables
+# - context variables: near, maxtime, mintime
+# - test  event with time
+#    13/09/2019 10:45:04
+##
+# insert context graql statements
+##
+#  first there  is a delete statement
+match $a isa maxtime; delete $a;
+##
+##
+# 
+match
+    $start isa start, 
+        has hour $starthour,
+        has minute $startmin,
+        has second $startsec;
+    $near isa neartime,
+        has hour $nearhour,
+        has minute $nearmin,
+        has second $nearsec;
+### Add seconds
+    (addees: $startsec, 
+        addors: $nearsec, 
+        results: $results, 
+        resrem: $rems ) isa addsec;
+### Depending on the Remainder from the seconds, add minutes
+    {
+        $rems == false;
+        $addm (addeem: $startmin,
+        addorm: $nearmin,
+        resultm: $resultm, 
+        resrem: $remm ) isa addmin;
+    } or
+    {
+        $rems == true;
+        $addm (addeem: $startmin,
+        addorm: $nearmin,
+        remresm: $resultm, 
+        remrem: $remm ) isa addmin;
+    };
+### Depending on the Remainder from the minutes, add hours
+    {
+        $remm == false;
+        $addh (addeeh: $starthour,
+        addorh: $nearhour,
+        resulth: $resulth, 
+        resrem: $remh ) isa addhour;
+    } or
+    {
+        $remm == true;
+        $addh (addeeh: $starthour,
+        addorh: $nearhour,
+        remresh: $resulth, 
+        remrem: $remh ) isa addhour;
+    };
+get
+
+
+
+
+
+match
+    $start isa start, 
+        has hour $starthour,
+        has minute $startmin,
+        has second $startsec;
+    $near isa neartime,
+        has hour $nearhour,
+        has minute $nearmin,
+        has second $nearsec;
+    $adds (addees: $startsec, 
+        addors: $nearsec, 
+        results: $results, 
+        remres: $remres,
+        resrem: $rems,
+        remrem: $remss ) isa addsec;
+    {
+        $rems == false;
+        $addm (addeem: $startmin,
+        addorm: $nearmin,
+        resultm: $resultm, 
+        resrem: $remm ) isa addmin;
+    } or
+    {
+        $rems == true;
+        $addm (addeem: $startmin,
+        addorm: $nearmin,
+        remresm: $resultm, 
+        remrem: $remm ) isa addmin;
+    };
+    {
+        $remm == false;
+        $addh (addeeh: $starthour,
+        addorh: $nearhour,
+        resulth: $resulth, 
+        resrem: $remh ) isa addhour;
+    } or
+    {
+        $remm == true;
+        $addh (addeeh: $starthour,
+        addorh: $nearhour,
+        remresh: $resulth, 
+        remrem: $remh ) isa addhour;
+    };
+get

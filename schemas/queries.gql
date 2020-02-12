@@ -1,0 +1,21 @@
+#####################
+# Use Case Concept:
+# Assume we have an event with a time, $a hour, $b min, $c secs, and we ignore millisecs for the moment
+# and in our personal context, the meaning of near, as it relates to time is stored as a time attribute, neartime
+# 
+# Then, the User issues a command, "find all the events near in time to this event", implying
+# mintime = event.time - neartime, and
+# maxtime = event.time + neartime
+# 
+# below we look first at developing the 
+#####################
+
+
+
+match
+    $a isa intnum; $a '8';
+    $b isa intnum; $b '7';
+    $c isa intnum;
+    $e isa resremainder;
+    $add (addeei: $a,addori: $b,resulti: $c,resrem: $e) isa addi;
+get;

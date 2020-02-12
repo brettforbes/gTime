@@ -1,0 +1,38 @@
+## works
+match
+    $a isa minute;     $a '06';
+    $b isa minute;     $b '30';
+    $c isa minute;	  
+    $d isa minute;   
+    $e isa remainder; 
+    $f isa remainder;  
+    $z (
+        addeem: $a,
+        addorm: $b,
+        resultm: $c,
+        remresm: $d, 
+        resrem: $e,
+        remrem: $f
+    ) isa addmin;
+    get; offset 0; limit 30;
+
+##
+
+
+    match
+    $a isa minute; 	$a == '40';
+    $b isa minute;   $b == '10';
+    $c isa minute; $c == '50';
+    $d isa minute; $d == '51';
+    $e isa remainder; $e == true;
+    get ; offset 0; limit 30;
+
+
+    match
+    $a isa minute; 	$a == '40';
+    $b isa minute;   $b == '10';
+    $c isa minute; $c == '50';
+    $d isa minute; $d == '51';
+    $e isa remainder; $e == true;
+    $z ($a,$b,$c,$d,$e,$e) isa addmin;
+    get $z ; offset 0; limit 30;
